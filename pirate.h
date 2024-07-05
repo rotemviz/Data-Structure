@@ -25,6 +25,7 @@ public:
     Node<Pirate>* getPtrShip()const{
         return m_ptrShip;
     }
+    //check;
 };
 
 #endif //EX3_Pirate_H
