@@ -1,15 +1,10 @@
-#include "linkedList.h"
+#include "AVL_Tree.h"
 
 int main() {
-    
-    List<int> list;
-    list.insert(8);
-    list.insert(4);
-    list.insert(6);
-    list.insert(1);
-    list.insert(3);
-    list.insert(123);
-
-
-    list.print1();
+    AVL_Tree<int,int> tree;
+    tree.insert(12, 1, tree.getRoot());
+    tree.insert(13, 1, tree.getRoot());
+    tree.insert(7, 1, tree.getRoot());
+    tree.insert(3, 1, tree.getRoot());
+    tree.print(tree.getRoot());
 }

@@ -12,9 +12,9 @@ public:
     Pirate(int id, int coin);
     void setPtrShip(Node<Pirate>* ptr);
     bool setCoin(int change);
-    int getCoin()const;
-    int getId()const;
-    Node<Pirate>* getPtrShip()const;
+    int getCoin() const;
+    int getId() const;
+    Node<Pirate>* getPtrShip() const;
     
 };
 

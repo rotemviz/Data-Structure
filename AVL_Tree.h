@@ -2,6 +2,8 @@
 #define EX1_AVL_Tree
 
 #include <cmath>
+#include <exception>
+#include <iostream>
 
 template<class K, class V>
 class AVL_Tree {
@@ -13,12 +15,20 @@ class AVL_Tree {
         V m_data;
         Node* m_right;
         Node* m_left;
-        Node* m_parent;
         int m_height;
 
         Node(const V& givenData, const K& key) : 
-            m_key(key), m_data(givenData), m_right(nullptr), m_left(nullptr), m_parent(nullptr), m_height(0) {}
+            m_key(key), m_data(givenData), m_right(nullptr), m_left(nullptr), m_height(0) {}
     };
+
+    Node* m_root;
+
+    int maxHeight(int one, int two) const {
+        if(one > two) {
+            return one;
+        }
+        return two;
+    }
 
     void deleteTree(Node* givenRoot) {
         if(givenRoot == nullptr) {
@@ -29,7 +39,51 @@ class AVL_Tree {
         delete givenRoot;
     }
 
-    Node* m_root;
+    void updateHeight(Node* root) {
+        if(root->m_left != nullptr && root->m_right != nullptr) {
+            root->m_height = 1 + maxHeight((root->m_left)->m_height, (root->m_right)->m_height);
+        }
+        else if(root->m_left != nullptr && root->m_right == nullptr) {
+            root->m_height = 1 + (root->m_left)->m_height;
+        }
+        else if(root->m_left == nullptr && root->m_right != nullptr) {
+            root->m_height = 1 + (root->m_right)->m_height;
+        }
+    }
+
+    int getBalance(Node* root) const {
+        int balance;
+        if(root->m_left != nullptr && root->m_right != nullptr) {
+            balance = (root->m_left)->m_height - (root->m_right)->m_height;
+        }
+        else if(root->m_left != nullptr && root->m_right == nullptr) {
+            balance = (root->m_left)->m_height + 1;
+        }
+        else if(root->m_left == nullptr && root->m_right != nullptr) {
+            balance = -1 - (root->m_right)->m_height;
+        }
+        return balance;
+    }
+
+    Node* rollRight(Node* root) {
+        Node* newRoot = root->m_left;
+        Node* rightNewRoot = newRoot->m_right;
+        newRoot->m_right = root;
+        root->m_left = rightNewRoot;
+        updateHeight(root);
+        updateHeight(newRoot);
+        return newRoot;
+    }
+
+    Node* rollLeft(Node* root) {
+        Node* newRoot = root->m_right;
+        Node* leftNewRoot = newRoot->m_left;
+        newRoot->m_left = root;
+        root->m_right = leftNewRoot;
+        updateHeight(root);
+        updateHeight(newRoot);
+        return newRoot;
+    }
 
 public:
 
@@ -46,41 +100,54 @@ public:
         
     }
 
-    bool insert(const K& key, const V& value, Node* root) {
+    Node* insert(const K& key, const V& value, Node* root) {
         if(root == nullptr) {
-            Node* newNode = new Node(key, value);
-            m_root = newNode;
-            return true;
+            root = new Node(key, value);
+            return root;
         }
-        bool success;
         if(root->m_key == key) {
-            return false;
+            throw std::invalid_argument("The key already exist");
         }
         if(key < root->m_key) {
-            if(root->m_left == nullptr) {
-                Node* newNode = new Node(key, value);
-                root->m_left = newNode;
-                if(root->m_right == nullptr) {
-                    root->m_height++;
-                }
-                return true;
-            }
-            success = insert(key, value, root->m_left);
+            root->m_left = insert(key, value, root->m_left);
         }
         if(key > root->m_key) {
-            if(root->m_right == nullptr) {
-                Node* newNode = new Node(key, value);
-                root->m_right = newNode;
-                if(root->m_left == nullptr) {
-                    root->m_height++;
-                }
-                return true;
+            root->m_right = insert(key, value, root->m_right);
+        }
+        updateHeight(root);
+        int balance = getBalance(root);
+        if(balance == 2) {
+            if(getBalance(root->m_left) >= 0) {
+                return rollRight(root);
             }
-            success = insert(key, value, root->m_right);
+            if(getBalance(root->m_left) < 0) {
+                root->m_left = rollLeft(root->m_left);
+                return rollRight(root);
+            }
         }
-        if(root->m_left != nullptr && root->m_right != nullptr) {
+        if(balance == -2) {
+            if(getBalance(root->m_right) < 0) {
+                return rollLeft(root);
+            }
+            if(getBalance(root->m_right) >= 0) {
+                root->m_right = rollRight(root->m_right);
+                return rollLeft(root);
+            }
+        }
+        return root;
+    }
 
+    void print(Node* root) {
+        if(root == nullptr) {
+            return;
         }
+        print(root->m_left);
+        std::cout << root->m_key << "   ";
+        print(root->m_right);
+    }
+
+    Node* getRoot() const {
+        return m_root;
     }
 };
 
