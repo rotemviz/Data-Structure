@@ -9,23 +9,13 @@ class Pirate{
     Node<Pirate>* m_ptrShip;
 
 public:
-    Pirate(int id, int coin) : m_id(id),m_coin(coin),m_ptrShip(nullptr){}
-    void setPtrShip(Node<Pirate>* ptr){
-        m_ptrShip = ptr;
-    }
-    bool setCoin(int change){
-        m_coin += change;
-    }
-    int getCoin()const{
-        return m_coin;
-    }
-    int getId()const{
-        return m_id;
-    }
-    Node<Pirate>* getPtrShip()const{
-        return m_ptrShip;
-    }
-    //check;
+    Pirate(int id, int coin);
+    void setPtrShip(Node<Pirate>* ptr);
+    bool setCoin(int change);
+    int getCoin()const;
+    int getId()const;
+    Node<Pirate>* getPtrShip()const;
+    
 };
 
 #endif //EX3_Pirate_H
