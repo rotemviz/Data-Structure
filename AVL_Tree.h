@@ -17,7 +17,7 @@ class AVL_Tree {
         Node* m_left;
         int m_height;
 
-        Node(const V& givenData, const K& key) : 
+        Node(const K& key, const V& givenData) : 
             m_key(key), m_data(givenData), m_right(nullptr), m_left(nullptr), m_height(0) {}
     };
 
@@ -85,25 +85,9 @@ class AVL_Tree {
         return newRoot;
     }
 
-public:
-
-    AVL_Tree() : m_root(nullptr) {}
-
-    ~AVL_Tree() {
-        if(m_root == nullptr) {
-            return;
-        }
-        deleteTree(m_root);
-    }
-
-    Node* find(const K& key, Node* root) {
-        
-    }
-
     Node* insert(const K& key, const V& value, Node* root) {
         if(root == nullptr) {
-            root = new Node(key, value);
-            return root;
+            return new Node(key, value);
         }
         if(root->m_key == key) {
             throw std::invalid_argument("The key already exist");
@@ -137,7 +121,7 @@ public:
         return root;
     }
 
-    void print(Node* root) {
+    void print(Node* root) const {
         if(root == nullptr) {
             return;
         }
@@ -146,8 +130,27 @@ public:
         print(root->m_right);
     }
 
-    Node* getRoot() const {
-        return m_root;
+public:
+
+    AVL_Tree() : m_root(nullptr) {}
+
+    ~AVL_Tree() {
+        if(m_root == nullptr) {
+            return;
+        }
+        deleteTree(m_root);
+    }
+
+    Node* find(const K& key, Node* root) {
+        
+    }
+
+    void insert(const K& key, const V& value) {
+        m_root = insert(key, value, m_root);
+    }
+
+    void print() const {
+        print(m_root);
     }
 };
 
