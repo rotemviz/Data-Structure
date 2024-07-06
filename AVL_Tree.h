@@ -121,6 +121,19 @@ class AVL_Tree {
         return root;
     }
 
+    // change the name of the method
+    Node* searchNum(Node* root, bool flag){
+        if(root->m_left == nullptr){
+            return root;
+        }
+        if(flag){
+            return searchNum(root->m_right,false);
+        }
+        else{
+            return searchNum(root->m_left,false);
+        }
+    }
+
     void print(Node* root) const {
         if(root == nullptr) {
             return;
@@ -128,6 +141,81 @@ class AVL_Tree {
         print(root->m_left);
         std::cout << root->m_key << "   ";
         print(root->m_right);
+    }
+    //add 
+    Node* remove(const K& key, Node* root){
+        if(root == nullptr){
+            throw std::invalid_argument("The key is not found");
+        }
+        if(key > root->m_key){
+            root->m_right = remove(key,root->m_right);
+        }
+        else if(key < root->m_key){
+            root->m_left = remove(key, root->m_left);
+        }
+        else{
+            if(root->m_left == nullptr || root->m_right == nullptr){
+                /*
+                Node* nodeToDelete = root->m_right ? root->m_right : root->m_left;
+                if(nodeToDelete == nullptr){
+                    nodeToDelete = root;
+                    root = nullptr;
+                }
+                else{
+                    Node* temp = root;
+                    root = nodeToDelete;
+                    nodeToDelete = temp;
+                    *root  = *nodeToDelete;
+                }
+                delete nodeToDelete;
+                return root;
+                */
+               Node* nodeToDelete = root;
+               if(root->m_left == nullptr){
+                root = root->m_right;
+               }
+               else{
+                root = root->m_left;
+               }
+
+               delete nodeToDelete;
+            }
+            else{
+                Node* nextKeyInInorder = searchNum(root,true);
+                //K = root->m_key;
+                //V = root->m_data;
+                root->m_key = nextKeyInInorder->m_key;
+                root->m_data = nextKeyInInorder->m_data;
+                root->m_right = remove(nextKeyInInorder->m_key, root->m_right);
+                //check....
+            }
+        }
+
+        if(root == nullptr){
+            return root;
+        }
+
+        updateHeight(root);
+        int balance = getBalance(root);
+        if(balance == 2) {
+            if(getBalance(root->m_left) >= 0) {
+                return rollRight(root);
+            }
+            if(getBalance(root->m_left) < 0) {
+                root->m_left = rollLeft(root->m_left);
+                return rollRight(root);
+            }
+        }
+        if(balance == -2) {
+            if(getBalance(root->m_right) < 0) {
+                return rollLeft(root);
+            }
+            if(getBalance(root->m_right) >= 0) {
+                root->m_right = rollRight(root->m_right);
+                return rollLeft(root);
+            }
+        }
+        return root;
     }
 
 public:
@@ -148,9 +236,17 @@ public:
     void insert(const K& key, const V& value) {
         m_root = insert(key, value, m_root);
     }
+    
+    void remove(const K& key){
+        remove(key, m_root);
+    }
 
     void print() const {
         print(m_root);
+    }
+
+    bool isEmpty()const{
+        return m_root == nullptr;
     }
 };
 

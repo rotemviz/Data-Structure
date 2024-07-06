@@ -1,15 +1,22 @@
-#include "linkedList.h"
+#include "AVL_Tree.h"
 
 int main() {
+    AVL_Tree<int,int> tree;
+    tree.insert(12,1);
+    tree.insert(15,1);
+    tree.insert(13,1);
+    tree.insert(17,1);
+    tree.insert(20,1);
+    tree.insert(2,1);
+    tree.insert(4,1);
+    
+    tree.print();
 
-    List<int> list;
-    list.insert(8);
-    list.insert(4);
-    list.insert(6);
-    list.insert(1);
-    list.insert(3);
-    list.insert(123);
+    tree.remove(17);
+    std::cout << std::endl;
+
+    tree.print();
 
 
-    list.print1();
+    
 }
