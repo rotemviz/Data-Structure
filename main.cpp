@@ -12,7 +12,7 @@ int main() {
     
     tree.print();
 
-    tree.remove(17);
+    tree.remove(13);
     std::cout << std::endl;
 
     tree.print();

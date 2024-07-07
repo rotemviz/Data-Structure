@@ -121,19 +121,6 @@ class AVL_Tree {
         return root;
     }
 
-    // change the name of the method
-    Node* searchNum(Node* root, bool flag){
-        if(root->m_left == nullptr){
-            return root;
-        }
-        if(flag){
-            return searchNum(root->m_right,false);
-        }
-        else{
-            return searchNum(root->m_left,false);
-        }
-    }
-
     void print(Node* root) const {
         if(root == nullptr) {
             return;
@@ -142,59 +129,42 @@ class AVL_Tree {
         std::cout << root->m_key << "   ";
         print(root->m_right);
     }
-    //add 
-    Node* remove(const K& key, Node* root){
-        if(root == nullptr){
-            throw std::invalid_argument("The key is not found");
+
+    Node* remove(const K& key, Node* root) {
+        if(root == nullptr) {
+            throw std::invalid_argument("The key doesn't exist");
         }
-        if(key > root->m_key){
-            root->m_right = remove(key,root->m_right);
+        if(key > root->m_key) {
+            root->m_right = remove(key, root->m_right);
         }
-        else if(key < root->m_key){
+        else if(key < root->m_key) {
             root->m_left = remove(key, root->m_left);
         }
-        else{
-            if(root->m_left == nullptr || root->m_right == nullptr){
-                /*
-                Node* nodeToDelete = root->m_right ? root->m_right : root->m_left;
-                if(nodeToDelete == nullptr){
-                    nodeToDelete = root;
+        else {
+            if(!root->m_left || !root->m_right) {
+                Node* temp = root->m_left ? root->m_left : root->m_right;
+                if(!temp) {
+                    temp = root;
                     root = nullptr;
                 }
-                else{
-                    Node* temp = root;
-                    root = nodeToDelete;
-                    nodeToDelete = temp;
-                    *root  = *nodeToDelete;
+                else {
+                    *root = *temp;
                 }
-                delete nodeToDelete;
-                return root;
-                */
-               Node* nodeToDelete = root;
-               if(root->m_left == nullptr){
-                root = root->m_right;
-               }
-               else{
-                root = root->m_left;
-               }
-
-               delete nodeToDelete;
+                delete temp;
             }
-            else{
-                Node* nextKeyInInorder = searchNum(root,true);
-                //K = root->m_key;
-                //V = root->m_data;
-                root->m_key = nextKeyInInorder->m_key;
-                root->m_data = nextKeyInInorder->m_data;
-                root->m_right = remove(nextKeyInInorder->m_key, root->m_right);
-                //check....
+            else {
+                Node* temp = root->m_right;
+                while(temp->m_left) {
+                    temp = temp->m_left;
+                }
+                root->m_key = temp->m_key;
+                root->m_data = temp->m_data;
+                root->m_right = remove(temp->m_key, root->m_right);
             }
         }
-
-        if(root == nullptr){
+        if(!root) {
             return root;
         }
-
         updateHeight(root);
         int balance = getBalance(root);
         if(balance == 2) {
@@ -218,6 +188,7 @@ class AVL_Tree {
         return root;
     }
 
+
 public:
 
     AVL_Tree() : m_root(nullptr) {}
@@ -238,7 +209,7 @@ public:
     }
     
     void remove(const K& key){
-        remove(key, m_root);
+        m_root = remove(key, m_root);
     }
 
     void print() const {
