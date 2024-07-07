@@ -1,6 +1,6 @@
 #include "pirate.h"
 
-Pirate::Pirate(int id, int coin) : m_id(id),m_coin(coin),m_ptrShip(nullptr){}
+Pirate::Pirate(int id, int coin) : m_id(id),m_coin(coin),m_ship(nullptr),m_ptrShip(nullptr){}
 void Pirate::setPtrShip(Node<Pirate>* ptr){
     m_ptrShip = ptr;
 }
@@ -15,4 +15,8 @@ int Pirate::getId()const{
 }
 Node<Pirate>* Pirate::getPtrShip()const{
     return m_ptrShip;
+}
+
+void Pirate::setShip(Ship* ptr){
+    m_ship = ptr;
 }

@@ -148,6 +148,7 @@ class AVL_Tree {
                     root = nullptr;
                 }
                 else {
+                    //check if we need to implemnt operator= and what about allocation
                     *root = *temp;
                 }
                 delete temp;
@@ -201,7 +202,23 @@ public:
     }
 
     Node* find(const K& key, Node* root) {
-        
+        if(root == nullptr){
+            return nullptr;
+        }
+        if(root->m_key == key){
+            return root;
+        }
+        if(key > root->m_key){
+            return find(key, root->m_left);
+        }
+        else{
+            return find(key, root->m_right);
+        }   
+    }
+    
+    V* getData(const K& key){
+        Node* temp = this->find(key,m_root);
+        return temp? temp->m_data : nullptr;
     }
 
     void insert(const K& key, const V& value) {

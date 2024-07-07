@@ -76,6 +76,10 @@ public:
         delete temp;
     }
 
+    Node<T>* ptrToTail(){
+        return m_tail;
+    }
+
 
     void print1() {
         Node<T>* node = m_head;
