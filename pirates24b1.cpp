@@ -1,4 +1,5 @@
 #include "pirates24b1.h"
+#include "ship.h"
 
 
 

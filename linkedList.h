@@ -15,6 +15,11 @@ class Node {
     Node* m_prev;
 
     Node(const V& givenData) : m_data(givenData), m_next(nullptr), m_prev(nullptr) {}
+
+public:
+    V getData()const{
+        return m_data;
+    }
 };
 
 template<class T>
@@ -78,6 +83,10 @@ public:
 
     Node<T>* ptrToTail(){
         return m_tail;
+    }
+
+    Node<T>* ptrToHead(){
+        return m_head;
     }
 
 

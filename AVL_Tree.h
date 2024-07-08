@@ -149,7 +149,9 @@ class AVL_Tree {
                 }
                 else {
                     //check if we need to implemnt operator= and what about allocation
-                    *root = *temp;
+                    //cahgne this(use pointer)
+                    delete root;
+                    return temp;
                 }
                 delete temp;
             }
@@ -235,6 +237,14 @@ public:
 
     bool isEmpty()const{
         return m_root == nullptr;
+    }
+    
+    V& getFarRight()const{
+        Node* temp = m_root;
+        while(temp->m_right == nullptr){
+            temp = temp->m_right;
+        }
+        return temp->m_data;
     }
 };
 

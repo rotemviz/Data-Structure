@@ -9,10 +9,11 @@ int main() {
     tree.insert(20,1);
     tree.insert(2,1);
     tree.insert(4,1);
+    tree.insert(11,1);
     
     tree.print();
 
-    tree.remove(13);
+    tree.remove(12);
     std::cout << std::endl;
 
     tree.print();
