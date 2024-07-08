@@ -209,10 +209,10 @@ public:
             return root;
         }
         if(key > root->m_key){
-            return find(key, root->m_left);
+            return find(key, root->m_right);
         }
         else{
-            return find(key, root->m_right);
+            return find(key, root->m_left);
         }   
     }
     
