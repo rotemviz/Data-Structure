@@ -191,10 +191,25 @@ class AVL_Tree {
         return root;
     }
 
+    void copy(Node* root, AVL_Tree& copyTo) {
+        if(root == nullptr) {
+            return;
+        }
+        copy(root->m_left, copyTo);
+        copyTo.insert(root->m_key, root->m_data);
+        copy(root->m_right, copyTo);
+    }
 
 public:
 
     AVL_Tree() : m_root(nullptr) {}
+
+    AVL_Tree(const AVL_Tree& givenTree) {
+        AVL_Tree tempTree;
+        copy(givenTree.m_root, tempTree);
+        this->m_root = tempTree.m_root;
+        tempTree.m_root = nullptr;
+    }
 
     ~AVL_Tree() {
         if(m_root == nullptr) {

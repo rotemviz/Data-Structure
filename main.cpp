@@ -11,13 +11,17 @@ int main() {
     tree.insert(4,1);
     tree.insert(11,1);
     
-    tree.print();
+    // tree.print();
 
     tree.remove(12);
-    std::cout << std::endl;
+    // std::cout << std::endl;
+    // tree.print();
 
-    tree.print();
+    // std::cout << std::endl;
+    // std::cout << std::endl;
 
-
-    
+    AVL_Tree<int,int> copyToTree(tree);
+    // copyToTree.print();
+    // std::cout << std::endl;
+    // tree.print();
 }
