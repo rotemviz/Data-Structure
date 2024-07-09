@@ -3,7 +3,7 @@
 
 #include "linkedList.h"
 #include "ship.h"
-
+class Ship;
 class Pirate{
     int m_id;
     int m_coin;
@@ -15,7 +15,7 @@ public:
     Pirate(int id, int coin);
     void setPtrShipNode(Node<Pirate>* ptr);
     void setShip(Ship* ptr);
-    bool setCoin(int change);
+    void setCoin(int change);
     int getCoin() const;
     int getId() const;
     Node<Pirate>* getPtrShipNode() const;

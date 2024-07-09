@@ -4,7 +4,7 @@ Pirate::Pirate(int id, int coin) : m_id(id),m_coin(coin),m_ship(nullptr),m_ptrSh
 void Pirate::setPtrShipNode(Node<Pirate>* ptr){
     m_ptrShipNode = ptr;
 }
-bool Pirate::setCoin(int change){
+void Pirate::setCoin(int change){
     m_coin += change;
 }
 int Pirate::getCoin()const{

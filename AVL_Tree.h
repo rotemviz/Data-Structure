@@ -235,7 +235,7 @@ public:
     
     V* getData(const K& key){
         Node* temp = this->find(key,m_root);
-        return temp? temp->m_data : nullptr;
+        return temp != nullptr ? &(temp->m_data) : nullptr;
     }
 
     void insert(const K& key, const V& value) {
@@ -256,10 +256,23 @@ public:
     
     V& getFarRight()const{
         Node* temp = m_root;
-        while(temp->m_right == nullptr){
+        while(temp->m_right != nullptr){
             temp = temp->m_right;
         }
         return temp->m_data;
+    }
+
+    void deleteData(Node* root){
+        if(root == nullptr) {
+            return;
+        }
+        deleteData(root->m_left);
+        deleteData(root->m_right);
+        delete root->m_data;
+    }
+
+    Node* getRoot(){
+        return m_root;
     }
 };
 

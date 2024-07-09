@@ -1,10 +1,11 @@
 #ifndef EX1_Ship_H
 #define EX1_Ship_H
-
+//#include "linkedList.h"
 #include "pirate.h"
 #include "AVL_Tree.h"
-
+class Pirate;
 class Ship{
+public:    
     int m_id;
     int m_cannons;
     int m_numOfPirates;
@@ -12,7 +13,7 @@ class Ship{
     List<Pirate> m_piratesList;
     AVL_Tree<int,AVL_Tree<int,int>> m_piratesAVL;
 
-public:
+//public:
     Ship(int id, int cannos);
     int getCannons()const;
     int get_numOfPirates()const;
@@ -22,6 +23,8 @@ public:
     int getPower()const;
     void setAmount(int change);
     void addPirate(Pirate* pirate);
+    bool isEmpty()const;
 };
 
 #endif //EX3_Ship_H
+

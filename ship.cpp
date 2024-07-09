@@ -56,7 +56,12 @@ void Ship::addPirate(Pirate* pirate){
     }
     AVL_Tree<int,int> newTree;
     newTree.insert(id,id);
-    m_piratesAVL.insert(pirate->getCoin(),newTree);
+    m_piratesAVL.insert(treasure,newTree);
     m_numOfPirates++;
     //copy ctor operator==
 }
+
+bool Ship::isEmpty()const{
+    return m_numOfPirates == 0;
+}
+

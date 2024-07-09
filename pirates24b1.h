@@ -14,12 +14,13 @@
 #define PIRRATES24SPRING_WET1_H_
 
 #include "wet1util.h"
+#include "ship.h"
 
 class Ocean {
 private:
-    //
-    // Here you may add anything you want
-    //
+AVL_Tree<int,Pirate*> m_pirates;
+AVL_Tree<int,Ship*> m_ships;
+    
     
 public:
     // <DO-NOT-MODIFY> {
