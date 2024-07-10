@@ -3,6 +3,7 @@
 
 #include "linkedList.h"
 #include "ship.h"
+
 class Ship;
 class Pirate{
     int m_id;
@@ -19,8 +20,7 @@ public:
     int getCoin() const;
     int getId() const;
     Node<Pirate>* getPtrShipNode() const;
-    Ship* getPtrShip()const;
-    
+    Ship* getPtrShip() const;
 };
 
 #endif //EX3_Pirate_H

@@ -10,6 +10,8 @@ public:
     int m_cannons;
     int m_numOfPirates;
     int m_amount;
+    int m_richestPirateId;
+    int m_richestPirateCoins;
     List<Pirate> m_piratesList;
     AVL_Tree<int,AVL_Tree<int,int>> m_piratesAVL;
 

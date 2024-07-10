@@ -254,12 +254,20 @@ public:
         return m_root == nullptr;
     }
     
-    V& getFarRight()const{
+    V& getFarRightValue() const{
         Node* temp = m_root;
         while(temp->m_right != nullptr){
             temp = temp->m_right;
         }
         return temp->m_data;
+    }
+
+    K getFarRightKey() const{
+        Node* temp = m_root;
+        while(temp->m_right != nullptr){
+            temp = temp->m_right;
+        }
+        return temp->m_key;
     }
 
     void deleteData(Node* root){

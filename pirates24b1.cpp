@@ -62,6 +62,9 @@ StatusType Ocean::update_pirate_treasure(int pirateId, int change)
         return StatusType::FAILURE;
     }
     (*check)->setCoin(change);
+    Ship* pirateShip = (*check)->getPtrShip();
+    pirateShip->removePirate(*check);
+    pirateShip->addPirate(*check);
     return StatusType::SUCCESS; 
 }
 
