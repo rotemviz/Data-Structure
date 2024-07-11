@@ -151,6 +151,7 @@ class AVL_Tree {
                     //check if we need to implemnt operator= and what about allocation
                     //cahgne this(use pointer)
                     delete root;
+                    root = nullptr;
                     return temp;
                 }
                 delete temp;
@@ -260,7 +261,7 @@ public:
             temp = temp->m_right;
         }
         return temp->m_data;
-    }
+    }//check if needed
 
     K getFarRightKey() const{
         Node* temp = m_root;

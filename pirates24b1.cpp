@@ -65,7 +65,7 @@ StatusType Ocean::update_pirate_treasure(int pirateId, int change)
     Ship* pirateShip = (*check)->getPtrShip();
     pirateShip->removePirate(*check);
     pirateShip->addPirate(*check);
-    return StatusType::SUCCESS; 
+    return StatusType::SUCCESS;
 }
 
 output_t<int> Ocean::get_treasure(int pirateId)

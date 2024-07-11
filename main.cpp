@@ -17,7 +17,10 @@ int main() {
     s1.addPirate(&p5);
     s1.removePirate(&p1);
     s1.removePirate(&p2);
+    // s1.removePirate(&p3);
     s1.removePirate(&p5);
+    s1.removePirateAVL(&p3);
+    s1.addPirateAVL(&p3);
     s1.m_piratesAVL.print();
 
     x = s1.getRichestPirate();

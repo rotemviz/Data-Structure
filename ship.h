@@ -22,9 +22,11 @@ public:
     int getAmount()const;
     int getRichestPirate()const;
     void removePirate(Pirate* pirate);
+    void removePirateAVL(Pirate* pirate);
     int getPower()const;
     void setAmount(int change);
     void addPirate(Pirate* pirate);
+    void addPirateAVL(Pirate* pirate);
     bool isEmpty()const;
 };
 
