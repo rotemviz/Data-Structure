@@ -13,10 +13,11 @@ public:
     int m_richestPirateId;
     int m_richestPirateCoins;
     List<Pirate> m_piratesList;
-    AVL_Tree<int,AVL_Tree<int,int>> m_piratesAVL;
+    AVL_Tree<int,AVL_Tree<int,int>*> m_piratesAVL;
 
 //public:
     Ship(int id, int cannos);
+    ~Ship();
     int getCannons()const;
     int get_numOfPirates()const;
     int getAmount()const;

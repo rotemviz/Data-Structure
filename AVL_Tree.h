@@ -36,10 +36,14 @@ class AVL_Tree {
         }
         deleteTree(givenRoot->m_left);
         deleteTree(givenRoot->m_right);
+        std::cout << "Deleting node with key: " << givenRoot->m_key << std::endl;
         delete givenRoot;
     }
 
     void updateHeight(Node* root) {
+        if(!root) {
+            return;
+        }
         if(root->m_left != nullptr && root->m_right != nullptr) {
             root->m_height = 1 + maxHeight((root->m_left)->m_height, (root->m_right)->m_height);
         }
@@ -52,7 +56,7 @@ class AVL_Tree {
     }
 
     int getBalance(Node* root) const {
-        int balance;
+        int balance = 0;
         if(root->m_left != nullptr && root->m_right != nullptr) {
             balance = (root->m_left)->m_height - (root->m_right)->m_height;
         }
@@ -191,32 +195,47 @@ class AVL_Tree {
         }
         return root;
     }
-
-    void copy(Node* root, AVL_Tree& copyTo) {
+    /*
+    void copy(Node* root, Node*& copyToRoot) {
         if(root == nullptr) {
+            copyToRoot = nullptr;
             return;
         }
-        copy(root->m_left, copyTo);
-        copyTo.insert(root->m_key, root->m_data);
-        copy(root->m_right, copyTo);
+        copyToRoot = new Node(root->m_key, root->m_data);
+        copy(root->m_left, copyToRoot->m_left);
+        copy(root->m_right, copyToRoot->m_right);
     }
+    */ 
 
 public:
 
     AVL_Tree() : m_root(nullptr) {}
 
-    AVL_Tree(const AVL_Tree& givenTree) {
+    /*
+    AVL_Tree(const AVL_Tree& givenTree) : m_root(nullptr) {
         AVL_Tree tempTree;
-        copy(givenTree.m_root, tempTree);
+        copy(givenTree.m_root, tempTree.m_root);
         this->m_root = tempTree.m_root;
         tempTree.m_root = nullptr;
     }
+    */
 
     ~AVL_Tree() {
         if(m_root == nullptr) {
             return;
         }
         deleteTree(m_root);
+    }
+
+    void deleteData(Node* root) {
+        if(root == nullptr) {
+            return;
+        }
+        deleteData(root->m_left);
+        deleteData(root->m_right);
+        if(root->m_data != nullptr) {
+            delete root->m_data;
+        } 
     }
 
     Node* find(const K& key, Node* root) {
@@ -270,7 +289,7 @@ public:
         }
         return temp->m_key;
     }
-
+    /*
     void deleteData(Node* root){
         if(root == nullptr) {
             return;
@@ -279,6 +298,7 @@ public:
         deleteData(root->m_right);
         delete root->m_data;
     }
+    */
 
     Node* getRoot(){
         return m_root;

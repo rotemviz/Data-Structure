@@ -6,6 +6,10 @@ int min(int a, int b){
 
 Ship::Ship(int id, int cannos) : m_id(id), m_cannons(cannos), m_numOfPirates(0), m_amount(0), m_richestPirateId(0), m_richestPirateCoins(0) {}
 
+Ship::~Ship() {
+    m_piratesAVL.deleteData(m_piratesAVL.getRoot());
+}
+
 int Ship::getCannons()const{
     return m_cannons;
 }
@@ -22,19 +26,21 @@ int Ship::getRichestPirate()const{
 void Ship::removePirateAVL(Pirate* pirate) {
     int id = pirate->getId();
     int treasure = pirate->getCoin();
-    AVL_Tree<int,int>* temp = m_piratesAVL.getData(treasure);
+    AVL_Tree<int,int>* temp = *(m_piratesAVL.getData(treasure));
     temp->remove(id);
     if(temp->isEmpty()){
+        delete temp;
+        temp = nullptr;
         m_piratesAVL.remove(treasure);
         if(m_piratesAVL.isEmpty()) {
             m_richestPirateCoins = 0;
             m_richestPirateId = 0;
+            return;
         }
-        return;
     }
     if(m_richestPirateId == id) {
         m_richestPirateCoins = m_piratesAVL.getFarRightKey();
-        temp = m_piratesAVL.getData(m_richestPirateCoins);
+        temp = *(m_piratesAVL.getData(m_richestPirateCoins));
         m_richestPirateId = temp->getFarRightKey();
     }
 }
@@ -57,13 +63,17 @@ void Ship::addPirateAVL(Pirate* pirate) {
     int id = pirate->getId();
     pirate->setCoin(-(m_amount));
     int treasure = pirate->getCoin();
-    AVL_Tree<int,int>* temp = m_piratesAVL.getData(treasure);
-    if(temp){
-        temp->insert(id,id);
+    AVL_Tree<int,int>** temp1 = m_piratesAVL.getData(treasure);
+    AVL_Tree<int,int>* temp2 = nullptr;
+    if(temp1) {
+        temp2 = *temp1;
+    }
+    if(temp2){
+        temp2->insert(id,id);
     }
     else {
-        AVL_Tree<int,int> newTree;
-        newTree.insert(id,id);
+        AVL_Tree<int,int>* newTree = new AVL_Tree<int,int>;
+        newTree->insert(id,id);
         m_piratesAVL.insert(treasure,newTree);
     }
     if(treasure > m_richestPirateCoins) {
