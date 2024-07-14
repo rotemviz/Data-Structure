@@ -70,6 +70,9 @@ class AVL_Tree {
     }
 
     Node* rollRight(Node* root) {
+        if(!root || !root->m_left) {
+            return root;
+        }
         Node* newRoot = root->m_left;
         Node* rightNewRoot = newRoot->m_right;
         newRoot->m_right = root;
@@ -80,6 +83,9 @@ class AVL_Tree {
     }
 
     Node* rollLeft(Node* root) {
+        if(!root || !root->m_right) {
+            return root;
+        }
         Node* newRoot = root->m_right;
         Node* leftNewRoot = newRoot->m_left;
         newRoot->m_left = root;
@@ -303,6 +309,7 @@ public:
     Node* getRoot(){
         return m_root;
     }
+
 };
 
 

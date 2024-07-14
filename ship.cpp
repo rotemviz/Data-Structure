@@ -45,7 +45,7 @@ void Ship::removePirateAVL(Pirate* pirate) {
     }
 }
 
-void Ship::removePirate(Pirate* pirate){   
+void Ship::removePirate(Pirate* pirate) {
     m_piratesList.remove(pirate->getPtrShipNode());
     removePirateAVL(pirate);
     m_numOfPirates--;
@@ -76,7 +76,7 @@ void Ship::addPirateAVL(Pirate* pirate) {
         newTree->insert(id,id);
         m_piratesAVL.insert(treasure,newTree);
     }
-    if(treasure > m_richestPirateCoins) {
+    if(treasure > m_richestPirateCoins || m_richestPirateId == 0) {
         m_richestPirateCoins = treasure;
         m_richestPirateId = id;
     }
