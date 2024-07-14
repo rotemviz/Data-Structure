@@ -1,7 +1,32 @@
-#include "ship.h"
+#include "pirates24b1.h"
 #include <iostream>
 
 int main() {
+    Ocean o1;
+    o1.add_ship(2,3);
+    o1.add_pirate(7,2,12);
+    o1.add_pirate(3,2,4);
+    o1.add_pirate(4,2,10);
+    o1.add_pirate(6,2,10);
+    o1.add_pirate(1,2,12);
+    o1.add_ship(5,7);
+    int x = (o1.get_richest_pirate(2)).ans();
+    std::cout << x << std::endl;
+    o1.treason(2,5);
+    o1.remove_pirate(1);
+    x = (o1.get_richest_pirate(5)).ans();
+    std::cout << x << std::endl;
+    x = (o1.get_richest_pirate(2)).ans();
+    std::cout << x << std::endl;
+
+
+
+    //x = (o1.get_richest_pirate(2)).ans();
+    //std::cout << x << std::endl;
+    
+
+
+    /*
     Ship s1(2,3);
     Pirate p1(3,4);
     Pirate p2(4,10);

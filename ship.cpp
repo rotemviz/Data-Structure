@@ -98,3 +98,8 @@ bool Ship::isEmpty()const{
     return m_numOfPirates == 0;
 }
 
+int Ship::getPirateID()const{
+    int id = ((m_piratesList.ptrToHead())->getData()).getId();
+    return id;
+}
+

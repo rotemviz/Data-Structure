@@ -17,39 +17,97 @@ StatusType Ocean::add_ship(int shipId, int cannons){
         return StatusType::INVALID_INPUT;
     }
     Ship** check = m_ships.getData(shipId);
-    if(check){
+    if(check && (*check)){
         return StatusType::FAILURE;
     }
+    Ship* newShip = nullptr;
     try{
-        Ship* newShip = new Ship(shipId,cannons);
-        m_ships.insert(shipId,newShip);
+        newShip = new Ship(shipId,cannons);
+        m_ships.insert(shipId,newShip); 
     }
     catch(...){
-        
-    }   
-    
-
+        if(newShip){
+            delete newShip;
+        }
+        return StatusType::ALLOCATION_ERROR;
+    }
     return StatusType::SUCCESS;
 }
 
 StatusType Ocean::remove_ship(int shipId)
 {
-    return StatusType::FAILURE;
+    if(shipId < MIN_ID){
+        return StatusType::INVALID_INPUT;
+    }
+    Ship** check = m_ships.getData(shipId);
+    if(!check ||!(*check) || !(*check)->isEmpty()){
+        return StatusType::FAILURE;
+    }
+    delete (*check);
+    m_ships.remove(shipId);
+    return StatusType::SUCCESS;
 }
 
 StatusType Ocean::add_pirate(int pirateId, int shipId, int treasure)
 {
-    return StatusType::FAILURE;
+    if(shipId < MIN_ID || pirateId < MIN_ID){
+        return StatusType::INVALID_INPUT;
+    }
+    Pirate** checkPirate = m_pirates.getData(pirateId);
+
+    Ship** checkShip = m_ships.getData(shipId);
+
+    if(!checkShip || !(*checkShip) || (checkPirate && (*checkPirate))){
+        return StatusType::FAILURE;
+    }
+    Pirate* newPirate = nullptr;
+    try{
+        newPirate = new Pirate(pirateId,treasure);
+        m_pirates.insert(pirateId,newPirate);
+        (*checkShip)->addPirate(newPirate);
+    }
+    catch(...){
+        if(newPirate){
+            delete newPirate;
+        }
+        return StatusType::ALLOCATION_ERROR;
+    }
+    return StatusType::SUCCESS;
 }
 
 StatusType Ocean::remove_pirate(int pirateId)
 {
-    return StatusType::FAILURE;
+    if(pirateId < MIN_ID){
+        return StatusType::INVALID_INPUT;
+    }
+    Pirate** check = m_pirates.getData(pirateId);
+     if(!check ||!(*check)){
+        return StatusType::FAILURE;
+    }
+    Ship* ship = (*check)->getPtrShip();
+    ship->removePirate((*check));
+    delete (*check);
+    m_pirates.remove(pirateId);
+    return StatusType::SUCCESS;
 }
 
 StatusType Ocean::treason(int sourceShipId, int destShipId)
 {
-    return StatusType::FAILURE;
+    if(destShipId < MIN_ID || sourceShipId < MIN_ID || destShipId == sourceShipId){
+        return StatusType::INVALID_INPUT;
+    }
+    Ship** checkShipDest = m_ships.getData(destShipId);
+    Ship** checkShipSource = m_ships.getData(sourceShipId);
+    if(!checkShipDest || !(*checkShipDest) || !checkShipSource || !(*checkShipSource) || (*checkShipSource)->isEmpty()){
+        return StatusType::FAILURE;
+    }
+    int pirateId = (*checkShipSource)->getPirateID();
+    Pirate** pirateToMove = m_pirates.getData(pirateId);
+    Pirate* pirate = *pirateToMove;
+    pirate->setCoin((*checkShipSource)->getAmount());
+    (*checkShipSource)->removePirate(pirate);
+    (*checkShipDest)->addPirate(pirate);
+    return StatusType::SUCCESS;
 }
 
 StatusType Ocean::update_pirate_treasure(int pirateId, int change)

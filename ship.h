@@ -5,7 +5,7 @@
 #include "AVL_Tree.h"
 class Pirate;
 class Ship{
-public:    
+//public:    
     int m_id;
     int m_cannons;
     int m_numOfPirates;
@@ -15,7 +15,7 @@ public:
     List<Pirate> m_piratesList;
     AVL_Tree<int,AVL_Tree<int,int>*> m_piratesAVL;
 
-//public:
+public:
     Ship(int id, int cannos);
     ~Ship();
     int getCannons()const;
@@ -29,6 +29,7 @@ public:
     void addPirate(Pirate* pirate);
     void addPirateAVL(Pirate* pirate);
     bool isEmpty()const;
+    int getPirateID()const;
 };
 
 #endif //EX3_Ship_H

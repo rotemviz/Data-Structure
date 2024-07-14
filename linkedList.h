@@ -81,15 +81,14 @@ public:
         delete temp;
     }
 
-    Node<T>* ptrToTail(){
+    Node<T>* ptrToTail()const{
         return m_tail;
     }
 
-    Node<T>* ptrToHead(){
+    Node<T>* ptrToHead()const{
         return m_head;
     }
-
-
+    
     void print1() {
         Node<T>* node = m_head;
         while (node != nullptr) {

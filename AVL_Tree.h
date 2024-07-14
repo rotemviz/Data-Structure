@@ -36,7 +36,7 @@ class AVL_Tree {
         }
         deleteTree(givenRoot->m_left);
         deleteTree(givenRoot->m_right);
-        std::cout << "Deleting node with key: " << givenRoot->m_key << std::endl;
+        //std::cout << "Deleting node with key: " << givenRoot->m_key << std::endl;
         delete givenRoot;
     }
 
