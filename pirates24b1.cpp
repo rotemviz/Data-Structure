@@ -88,6 +88,7 @@ StatusType Ocean::remove_pirate(int pirateId)
     ship->removePirate((*check));
     delete (*check);
     m_pirates.remove(pirateId);
+    //delete (*check);
     return StatusType::SUCCESS;
 }
 
@@ -104,8 +105,8 @@ StatusType Ocean::treason(int sourceShipId, int destShipId)
     int pirateId = (*checkShipSource)->getPirateID();
     Pirate** pirateToMove = m_pirates.getData(pirateId);
     Pirate* pirate = *pirateToMove;
-    pirate->setCoin((*checkShipSource)->getAmount());
     (*checkShipSource)->removePirate(pirate);
+    pirate->setCoin((*checkShipSource)->getAmount());
     (*checkShipDest)->addPirate(pirate);
     return StatusType::SUCCESS;
 }
