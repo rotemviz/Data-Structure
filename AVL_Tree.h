@@ -272,21 +272,21 @@ public:
         m_root = remove(key, m_root);
     }
 
-    void print() const {
-        print(m_root);
-    }
+    // void print() const {
+    //     print(m_root);
+    // }
 
     bool isEmpty()const{
         return m_root == nullptr;
     }
     
-    V& getFarRightValue() const{
-        Node* temp = m_root;
-        while(temp->m_right != nullptr){
-            temp = temp->m_right;
-        }
-        return temp->m_data;
-    }//check if needed
+    // V& getFarRightValue() const{
+    //     Node* temp = m_root;
+    //     while(temp->m_right != nullptr){
+    //         temp = temp->m_right;
+    //     }
+    //     return temp->m_data;
+    // }//check if needed
 
     K getFarRightKey() const{
         Node* temp = m_root;
@@ -309,6 +309,36 @@ public:
     Node* getRoot(){
         return m_root;
     }
+
+    // void print() const
+    // {
+    //     if (!m_root)
+    //     {
+    //         std::cout << "Tree is empty.\n";
+    //         return;
+    //     }
+    //     printTree(m_root, 0);
+    // }
+
+    // void printTree(Node *node, int space) const
+    // {
+    //     if (!node)
+    //         return;
+
+    //     const int COUNT = 5;
+    //     space += COUNT;
+
+    //     printTree(node->m_right, space);
+
+    //     std::cout << std::endl;
+    //     for (int i = COUNT; i < space; ++i)
+    //     {
+    //         std::cout << " ";
+    //     }
+    //     std::cout << node->m_key << "\n";
+
+    //     printTree(node->m_left, space);
+    // }
 
 };
 
