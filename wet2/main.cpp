@@ -1,17 +1,18 @@
 #include <iostream>
-#include "Array.h"
+#include "HashTable.h"
+
+class A {
+    int id;
+
+};
 
 int main() {
     
-    Array<int> arr(5, -1);
-    arr.store(0,3);
-    arr.store(1,2);
+    HashTable<A*> hash();
+    hash.insert(17429, 12);
+
+
     
-    int x = arr.get(0);
-    int y = arr.get(1);
-
-    std::cout << x << std::endl << y << std::endl << arr.get(4) << std::endl;
-
 
     
 }

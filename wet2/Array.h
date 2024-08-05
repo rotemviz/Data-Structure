@@ -12,12 +12,16 @@ class Array {
     T* C;
     
 public:
-    Array(int size, T constant) : m_constant(constant), m_size(size), m_top(0), A(new T(m_size)), B(new T(m_size)), C(new T(m_size)) {};
+    Array(int size, T constant) : m_constant(constant), m_size(size), m_top(0), A(new T[m_size]), B(new T[m_size]), C(new T[m_size]) {};
 
     ~Array() {
-        delete A;
-        delete B;
-        delete C;
+        delete [] A;
+        delete [] B;
+        delete [] C;
+    }
+
+    int getSize() const {
+        return m_size;
     }
 
     bool isAssigned(int i) const {

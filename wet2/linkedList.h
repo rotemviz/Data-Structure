@@ -10,14 +10,24 @@ class Node {
 
     friend class List<V>;
     V m_data;
+    int m_id;
     Node* m_next;
     Node* m_prev;
 
-    Node(const V& givenData) : m_data(givenData), m_next(nullptr), m_prev(nullptr) {}
+    Node(const V& givenData, const int id) : m_data(givenData), m_id(id) ,m_next(nullptr), m_prev(nullptr) {}
 
 public:
-    V getData()const{
+
+    V getData() const {
         return m_data;
+    }
+
+    int getID() const {
+        return m_id;
+    }
+
+    Node<T>* getNext(const Node<T>* node) const {
+        return node->m_next;
     }
 };
 
@@ -39,17 +49,19 @@ public:
         }
     }
 
-    void insert(const T& data) {
-        Node<T>* newNode = new Node<T>(data);
+    void insert(const T& data, int id) {
+        Node<T>* newNode = new Node<T>(data, id);
         if(m_tail == nullptr) {
             m_head = newNode;
             m_tail = newNode;
             return;
         }
-        m_tail->m_next = newNode;
-        newNode->m_prev = m_tail;
-        m_tail = m_tail->m_next;
+        m_head->m_prev = newNode;
+        newNode->m_next = m_head;
+        m_head = newNode;
     }
+
+    
 
     void remove(Node<T>* node) {
         if(node == nullptr || m_head == nullptr) {
@@ -86,6 +98,17 @@ public:
 
     Node<T>* ptrToHead()const{
         return m_head;
+    }
+
+    Node<T>* findId(int toFind) const {
+        Node<T>* tempNode = m_head;
+        while(tempNode != nullptr) {
+            if(tempNode->id == toFind) {
+                return tempNode;
+            }
+            tempNode = tempNode->m_next;
+        }
+        return nullptr;
     }
 
 };
