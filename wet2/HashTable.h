@@ -30,9 +30,7 @@ public:
                 List<T>& tempData = oldArray[i];
                 Node<T>* tempNode = tempData.ptrToHead();
                 while(tempNode){
-                    //std::cout << "checkResize" << std::endl;
                     this->insert(tempNode->getID(), tempNode->getData());
-                    //std::cout << "check" << std::endl;
                     tempNode = tempNode->getNext();
                 }
             }
@@ -49,7 +47,7 @@ public:
 
 //public:
 
-    HashTable() : MAX_LOAD_FACTOR(0.75), m_size(4), m_arr(new List<T>[m_size]), m_assignedCounter(0) {}
+    HashTable() : MAX_LOAD_FACTOR(0.75), m_size(20), m_arr(new List<T>[m_size]), m_assignedCounter(0) {}
 
     ~HashTable() {
         delete [] m_arr;
@@ -57,22 +55,15 @@ public:
 
     bool insert(int id, T data) {
         if(((double)(m_assignedCounter)/m_size) >= MAX_LOAD_FACTOR) {
-            //std::cout << "check" << std::endl;
             resizeArray();
         }
         int index = hashFunc(id);
-        //std::cout << "check22" << std::endl;
         List<T>& tempList = m_arr[index];
-        //std::cout << tempList.ptrToHead() << std::endl;
-        //std::cout << "check77777" << std::endl;
         if(!tempList.findId(id)) {
-            //std::cout << "check55" << std::endl;
             tempList.insert(data, id);
-            //std::cout << "check1111" << std::endl;
             m_assignedCounter++;
             return true;
         }
-        //std::cout << "checkOut" << std::endl;
         return false;
     }
 

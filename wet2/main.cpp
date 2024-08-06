@@ -1,35 +1,29 @@
 #include <iostream>
-#include "HashTable.h"
+#include "UnionFind.h"
 
 
 int main() {
-    
-    HashTable<int*> hash;
+    UnionFind uf;
+    NodeGroup grp1(20);
+    NodeGroup grp2(12);
+    Fleet f1(20,&grp1);
+    Fleet f2(12,&grp2);
+    grp1.setRootFleet(&f1);
+    grp2.setRootFleet(&f2);
+    uf.makeSet(&f1,&grp1);
+    uf.makeSet(&f2,&grp2);
+    uf.uniteGroups(&grp1,&grp2);
+    int x = grp1.getNumOfShips();
+    int y = grp1.getNumOfPirates();
+    int z = f2.getExtraRank();
+    bool check = (f2.getNextFleet() == &f1);
+    std::cout << x << std::endl;
+    std::cout << y << std::endl;
+    std::cout << z << std::endl;
+    std::cout << check << std::endl;
 
-    int y = 12;
-    //int z = 0;
 
-    hash.insert(17429, &y);
-    hash.insert(29484755, &y);
-    hash.insert(437834, &y);
-    std::cout << hash.m_assignedCounter << std::endl;
-    std::cout << hash.m_size << std::endl;
-    hash.insert(3838484, &y);
-    std::cout << hash.m_assignedCounter << std::endl;
-    std::cout << hash.m_size << std::endl;
-    //hash.insert(4994, &y);
-    //hash.insert(497, &y);
-    //std::cout << hash.m_assignedCounter << std::endl;
-    //std::cout << hash.m_size << std::endl;
-    //hash.insert(49941, &y);
-    //std::cout << hash.m_assignedCounter << std::endl;
-    //std::cout << hash.m_size << std::endl;
-    //hash.insert(49942, &y);
-    //hash.insert(494, &y);
-    //std::cout << hash.m_assignedCounter << std::endl;
     
-    //Node<int*>* temp = hash.find(29484755);
-    //int x = temp->getID();
-    //std::cout << x << std::endl;
+
     
 }
