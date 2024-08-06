@@ -111,6 +111,10 @@ public:
         return nullptr;
     }
 
+    bool isEmpty()const{
+        return m_head == nullptr;
+    }
+
 };
 
 #endif //List
