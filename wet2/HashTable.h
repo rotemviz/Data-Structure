@@ -7,9 +7,9 @@
 
 template<class T>
 class HashTable {
+public:
 
-    static const double MAX_LOAD_FACTOR = 0.75;
-
+    double MAX_LOAD_FACTOR = 0.75;
     int m_size;
     Array<List<T>*>* m_arr;
     int m_assignedCounter;
@@ -20,7 +20,7 @@ class HashTable {
 
     void deleteArr(Array<List<T>*>* arr) {
         for(int i=0; i < arr->getSize(); i++) {
-            List<T>* temp = m_arr->get(i);
+            List<T>* temp = arr->get(i);
             if(temp) {
                 delete temp;
             }
@@ -29,7 +29,7 @@ class HashTable {
     
     void resizeArray() {
         m_size = m_size*2;
-        Array<List<T>*>* newArray = new Array<List<T>*>(m_size);
+        Array<List<T>*>* newArray = new Array<List<T>*>(m_size,nullptr);
         Array<List<T>*>* oldArray = m_arr;
         m_arr = newArray;
         int oldCounter = m_assignedCounter;
@@ -58,12 +58,13 @@ class HashTable {
         delete oldArray;
     }
 
-public:
+//public:
 
-    HashTable() : m_size(20), m_arr(new Array<List<T>*>(m_size, nullptr)), m_assignedCounter(0) {}
+    HashTable() : MAX_LOAD_FACTOR(0.75), m_size(8), m_arr(new Array<List<T>*>(m_size, nullptr)), m_assignedCounter(0) {}
 
     ~HashTable() {
         deleteArr(m_arr);
+        delete m_arr;
     }
 
     bool insert(int id, T data) {
@@ -89,9 +90,9 @@ public:
 
     Node<T>* find(int id) {
         int index = hashFunc(id);
-        List<T>* list = m_arr->get(i);
+        List<T>* list = m_arr->get(index);
         if(list) {
-            return list->findID(id);
+            return list->findId(id);
         }
         return nullptr;
     }

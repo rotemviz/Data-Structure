@@ -1,5 +1,6 @@
 #ifndef ARRAY
 #define ARRAY
+#include <iostream>
 
 template<class T>
 class Array {
@@ -8,11 +9,11 @@ class Array {
     int m_size;
     int m_top;
     T* A;
-    T* B;
-    T* C;
+    int* B;
+    int* C;
     
 public:
-    Array(int size, T constant) : m_constant(constant), m_size(size), m_top(0), A(new T[m_size]), B(new T[m_size]), C(new T[m_size]) {};
+    Array(int size, T constant) : m_constant(constant), m_size(size), m_top(0), A(new T[m_size]), B(new int[m_size]), C(new int[m_size]) {};
 
     ~Array() {
         delete [] A;
@@ -25,6 +26,8 @@ public:
     }
 
     bool isAssigned(int i) const {
+        //std::cout << i << std::endl;
+        //std::cout << B[i] << std::endl;
         return (B[i] < m_top && B[i] >= 0 && C[B[i]] == i);
     }
 

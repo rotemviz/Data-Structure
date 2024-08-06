@@ -26,8 +26,8 @@ public:
         return m_id;
     }
 
-    Node<T>* getNext(const Node<T>* node) const {
-        return node->m_next;
+    Node<V>* getNext() const {
+        return this->m_next;
     }
 };
 
@@ -103,7 +103,7 @@ public:
     Node<T>* findId(int toFind) const {
         Node<T>* tempNode = m_head;
         while(tempNode != nullptr) {
-            if(tempNode->id == toFind) {
+            if(tempNode->m_id == toFind) {
                 return tempNode;
             }
             tempNode = tempNode->m_next;
