@@ -23,6 +23,8 @@ int main() {
     hash.insert(49942, &y);
     hash.insert(494, &y);
     std::cout << hash.m_assignedCounter << std::endl;
+    List<int>* arr = new List<T>[10];
+    arr[10].insert
     
 
     
