@@ -102,7 +102,7 @@ public:
 
     Node<T>* findId(int toFind) const {
         Node<T>* tempNode = m_head;
-        while(tempNode != nullptr) {
+        while(tempNode != nullptr){
             if(tempNode->m_id == toFind) {
                 return tempNode;
             }

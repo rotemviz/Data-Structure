@@ -1,0 +1,47 @@
+==3717== Memcheck, a memory error detector
+==3717== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==3717== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==3717== Command: ./a.out
+==3717== Parent PID: 3451
+==3717== 
+==3717== Invalid read of size 8
+==3717==    at 0x10CE52: AVL_Tree<int, Ship*>::rollRight(AVL_Tree<int, Ship*>::Node*) (AVL_Tree.h:74)
+==3717==    by 0x10C5B6: AVL_Tree<int, Ship*>::remove(int const&, AVL_Tree<int, Ship*>::Node*) (AVL_Tree.h:192)
+==3717==    by 0x10C36D: AVL_Tree<int, Ship*>::remove(int const&, AVL_Tree<int, Ship*>::Node*) (AVL_Tree.h:145)
+==3717==    by 0x10C335: AVL_Tree<int, Ship*>::remove(int const&, AVL_Tree<int, Ship*>::Node*) (AVL_Tree.h:142)
+==3717==    by 0x10BDC3: AVL_Tree<int, Ship*>::remove(int const&) (AVL_Tree.h:266)
+==3717==    by 0x10B26E: Ocean::remove_ship(int) (pirates24b1.cpp:47)
+==3717==    by 0x10A545: main (main24b1.cpp:37)
+==3717==  Address 0x10 is not stack'd, malloc'd or (recently) free'd
+==3717== 
+==3717== 
+==3717== Process terminating with default action of signal 11 (SIGSEGV)
+==3717==  Access not within mapped region at address 0x10
+==3717==    at 0x10CE52: AVL_Tree<int, Ship*>::rollRight(AVL_Tree<int, Ship*>::Node*) (AVL_Tree.h:74)
+==3717==    by 0x10C5B6: AVL_Tree<int, Ship*>::remove(int const&, AVL_Tree<int, Ship*>::Node*) (AVL_Tree.h:192)
+==3717==    by 0x10C36D: AVL_Tree<int, Ship*>::remove(int const&, AVL_Tree<int, Ship*>::Node*) (AVL_Tree.h:145)
+==3717==    by 0x10C335: AVL_Tree<int, Ship*>::remove(int const&, AVL_Tree<int, Ship*>::Node*) (AVL_Tree.h:142)
+==3717==    by 0x10BDC3: AVL_Tree<int, Ship*>::remove(int const&) (AVL_Tree.h:266)
+==3717==    by 0x10B26E: Ocean::remove_ship(int) (pirates24b1.cpp:47)
+==3717==    by 0x10A545: main (main24b1.cpp:37)
+==3717==  If you believe this happened as a result of a stack
+==3717==  overflow in your program's main thread (unlikely but
+==3717==  possible), you can try to increase the size of the
+==3717==  main thread stack using the --main-stacksize= flag.
+==3717==  The main thread stack size used in this run was 8388608.
+==3717== 
+==3717== HEAP SUMMARY:
+==3717==     in use at exit: 85,495 bytes in 141 blocks
+==3717==   total heap usage: 222 allocs, 81 frees, 87,380 bytes allocated
+==3717== 
+==3717== LEAK SUMMARY:
+==3717==    definitely lost: 0 bytes in 0 blocks
+==3717==    indirectly lost: 0 bytes in 0 blocks
+==3717==      possibly lost: 0 bytes in 0 blocks
+==3717==    still reachable: 85,495 bytes in 141 blocks
+==3717==         suppressed: 0 bytes in 0 blocks
+==3717== Reachable blocks (those to which a pointer was found) are not shown.
+==3717== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==3717== 
+==3717== For lists of detected and suppressed errors, rerun with: -s
+==3717== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)

@@ -1,0 +1,13 @@
+"C:\Program Files\JetBrains\CLion 2023.3.2\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=C:/Program Files/JetBrains/CLion 2023.3.2/bin/ninja/win/x64/ninja.exe" -G Ninja -S C:\Users\AdirLevi\gitData\Data-Structure -B C:\Users\AdirLevi\gitData\Data-Structure\cmake-build-debug
+-- Configuring done (0.2s)
+CMake Error at CMakeLists.txt:8 (add_executable):
+  Cannot find source file:
+
+    main24b1.cpp
+
+
+CMake Error at CMakeLists.txt:8 (add_executable):
+  No SOURCES given to target: Data_Structure
+
+
+CMake Generate step failed.  Build files cannot be regenerated correctly.

@@ -1,0 +1,10 @@
+# ninja log v5
+6	582	7430450450719592	build.ninja	a1683706157bfff7
+3437	4933	7430448920636293	CMakeFiles/Data_Structure.dir/lala.cpp.obj	3c2101651aced64d
+2	3392	7430448904606063	CMakeFiles/Data_Structure.dir/ship.cpp.obj	efab6c5c65fba33c
+10	3436	7430448905306044	CMakeFiles/Data_Structure.dir/pirates24b1.cpp.obj	e3c7a55d770434d9
+20	4376	7430448915026212	CMakeFiles/Data_Structure.dir/main.cpp.obj	fb85ff34b7151e96
+3419	4865	7430448919656278	CMakeFiles/Data_Structure.dir/pirate.cpp.obj	708be2dc2bdb5804
+7	301	7430450251252998	Data_Structure.exe	8dc0f9783816531c
+3	872	7430450450719592	build.ninja	a1683706157bfff7
+6	253	7430450456571475	Data_Structure.exe	23f8d75f67615b5d
