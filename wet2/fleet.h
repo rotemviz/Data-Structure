@@ -1,71 +1,31 @@
 #ifndef fleet
 #define fleet
 
-class Fleet;
-class NodeGroup{
-    int m_ID;
-    int m_numOfPirates;
-    int m_numOfShips;
-    Fleet* m_rootFleet;
-
-public:
-    NodeGroup(int id): m_ID(id), m_numOfPirates(0), m_numOfShips(1), m_rootFleet(nullptr){};
-
-    void setNumOfPirates(int numPirates){
-        m_numOfPirates += numPirates;
-    }
-
-    int getNumOfPirates()const{
-        return m_numOfPirates;
-    }
-    int getNumOfShips()const{
-        return m_numOfShips;
-    }
-    Fleet* getFleetPtr()const{
-        return m_rootFleet;
-    }
-
-    void resetRootFleet(){
-        m_rootFleet = nullptr;
-    }
-
-    void setRootFleet(Fleet* givenFleet){
-        m_rootFleet = givenFleet;
-    }
-
-    void setNumOfShips(int num){
-        m_numOfShips += num;
-
-    }
-
-};
-
 class Fleet{
     int m_ID;
     Fleet* m_nextFleet;
-    NodeGroup* m_group;
     int m_extraToRank;
+    int m_totalPirates;
+    int m_updateId;
+    int m_numOfShips;
 
 public:
-    Fleet(int id, NodeGroup* group): m_ID(id), m_nextFleet(nullptr), m_group(group), m_extraToRank(0){}
+    Fleet(int id): m_ID(id), m_nextFleet(nullptr), m_extraToRank(0),
+                 m_totalPirates(0),m_updateId(id),m_numOfShips(1){}
     void setNextFleet(Fleet* givenFleet){
         m_nextFleet = givenFleet;
     }
     
-    void setGroup(NodeGroup* group){
-        m_group = group;
-    }
-
     Fleet* getNextFleet()const{
         return m_nextFleet;
-    }
-    
-    NodeGroup* getGroup()const{
-        return m_group;
     }
 
     void setExtraRank(int num){
         m_extraToRank = num;
+    }
+
+    void addExtraRank(int num){
+        m_extraToRank += num;
     }
     int getExtraRank()const{
         return m_extraToRank;
@@ -75,7 +35,30 @@ public:
         return m_ID;
     }
 
+    int getTotalPirates()const{
+        return m_totalPirates;
+    }
+
+    void setTotalPirates(int numToAdd){
+        m_totalPirates += numToAdd;
+    }
+
+    int getNumOfShips()const{
+        return m_numOfShips;
+    }
+
+    void setNumOfShips(int num){
+        m_numOfShips += num;
+
+    }
     
+    int getUpdateID()const{
+        return m_updateId;
+    }
+
+    void setUpdateID(int id){
+        m_updateId = id;
+    }
 };
 
 
