@@ -8,7 +8,6 @@ public:
 
     HashTable<Fleet*> m_fleets;
 
-//public:
     bool makeSet(Fleet* givenFleet){
         int id = givenFleet->getID();
         return m_fleets.insert(id,givenFleet);
@@ -85,6 +84,15 @@ public:
         return root;
     }
 
+    int getRankExtra(Fleet* givenFleet)const{
+        int sum = 0;
+        while(givenFleet != nullptr){
+            sum += givenFleet->getExtraRank();
+            givenFleet = givenFleet->getNextFleet();
+        }
+        return sum;
+    }
+    
 };
 
 #endif //UF

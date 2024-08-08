@@ -15,7 +15,7 @@ int Pirate::getRank()const{
     return m_rank;
 }
 
-void Pirate::setRank(int rank)const{
+void Pirate::setRank(int rank){
     m_rank = rank;
 }
 

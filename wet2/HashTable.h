@@ -18,6 +18,18 @@ public:
         return id%m_size;
     }
 
+    
+    void deleteData(List<T>* arr){
+        for(int i=0; i<m_size; i++) {
+                List<T>& tempData = arr[i];
+                Node<T>* tempNode = tempData.ptrToHead();
+                while(tempNode){
+                    delete (tempNode->getData());
+                    tempNode = tempNode->getNext();
+                }
+        }
+    }
+
     void resizeArray() {
         m_size = m_size*2;
         List<T>* newArray = new List<T>[m_size];
@@ -47,9 +59,10 @@ public:
 
 //public:
 
-    HashTable() : MAX_LOAD_FACTOR(0.75), m_size(20), m_arr(new List<T>[m_size]), m_assignedCounter(0) {}
+    HashTable() : MAX_LOAD_FACTOR(0.75), m_size(1000), m_arr(new List<T>[m_size]), m_assignedCounter(0) {}
 
     ~HashTable() {
+        deleteData(m_arr);
         delete [] m_arr;
     }
 
@@ -71,9 +84,9 @@ public:
         int index = hashFunc(id);
         List<T>& list = m_arr[index];
         return list.findId(id);
-        
     }
 
 };
 
 #endif // HASH_TABLE
+

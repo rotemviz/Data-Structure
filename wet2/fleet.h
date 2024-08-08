@@ -59,6 +59,10 @@ public:
     void setUpdateID(int id){
         m_updateId = id;
     }
+
+    bool isEmpty()const{
+        return m_totalPirates == 0;
+    }
 };
 
 

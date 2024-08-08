@@ -16,7 +16,7 @@ public:
     int getCoin() const;
     int getId() const;
     int getRank()const;
-    void setRank(int rank)const;
+    void setRank(int rank);
     Fleet* getPtrFleet() const;
 };
 

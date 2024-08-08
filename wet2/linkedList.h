@@ -49,16 +49,27 @@ public:
         }
     }
 
-    void insert(const T& data, int id) {
-        Node<T>* newNode = new Node<T>(data, id);
+    // void insert(const T& data, int id) {
+    //     Node<T>* newNode = new Node<T>(data, id);
+    //     if(m_tail == nullptr) {
+    //         m_head = newNode;
+    //         m_tail = newNode;
+    //         return;
+    //     }
+    //     m_head->m_prev = newNode;
+    //     newNode->m_next = m_head;
+    //     m_head = newNode;
+    // }
+    void insert(const T& data,int id) {
+        Node<T>* newNode = new Node<T>(data,id);
         if(m_tail == nullptr) {
             m_head = newNode;
             m_tail = newNode;
             return;
         }
-        m_head->m_prev = newNode;
-        newNode->m_next = m_head;
-        m_head = newNode;
+        m_tail->m_next = newNode;
+        newNode->m_prev = m_tail;
+        m_tail = m_tail->m_next;
     }
 
     
