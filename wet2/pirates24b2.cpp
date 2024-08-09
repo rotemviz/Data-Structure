@@ -25,6 +25,9 @@ StatusType oceans_t::add_fleet(int fleetId)
 		return StatusType::ALLOCATION_ERROR;
 	}
 	bool check = m_fleets.makeSet(fleetToInsert);
+	if(!check){
+		delete fleetToInsert;
+	}
 	return check ? StatusType::SUCCESS : StatusType::FAILURE;
 }
 
@@ -147,3 +150,5 @@ StatusType oceans_t::pirate_argument(int pirateId1, int pirateId2)
 	}
     return StatusType::SUCCESS;
 }
+
+

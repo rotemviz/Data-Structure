@@ -92,7 +92,8 @@ public:
         }
         return sum;
     }
-    
+
 };
 
 #endif //UF
+
