@@ -43,6 +43,7 @@ StatusType oceans_t::add_pirate(int pirateId, int fleetId)
 	}
 	Pirate* pirate = nullptr;
 	int rank = root->getTotalPirates();
+	rank -= root->getExtraRank();
 	try{
 		pirate = new Pirate(pirateId,root,rank+1);
 		m_pirates.insert(pirateId,pirate);
@@ -139,7 +140,7 @@ StatusType oceans_t::pirate_argument(int pirateId1, int pirateId2)
 	int rank2 = pirate2->getRank() + m_fleets.getRankExtra(origin_fleet2);
 	int payment = 0;
 	if(rank1 > rank2){
-		payment = rank1-rank2;
+		payment = rank1 - rank2;
 		pirate2->setCoin(payment);
 		pirate1->setCoin(-payment);
 	}

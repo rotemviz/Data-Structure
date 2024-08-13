@@ -73,7 +73,7 @@ public:
 
         temp = fleetNode->getData();
         Fleet* tempNext = temp->getNextFleet();
-        while(tempNext != root && tempNext != nullptr){
+        while(tempNext != nullptr){
             temp->setNextFleet(root);
             int subNum = temp->getExtraRank();
             temp->setExtraRank(sum);

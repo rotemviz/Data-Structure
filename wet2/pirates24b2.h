@@ -45,6 +45,15 @@ public:
     StatusType unite_fleets(int fleetId1, int fleetId2);
 
     StatusType pirate_argument(int pirateId1, int pirateId2);
+
+    output_t<int> get_pirate_rank(int id) {
+        Node<Pirate*>* check1 = m_pirates.find(id);
+        Pirate* pirate1 = check1->getData();
+	    Fleet* origin_fleet1 = pirate1->getPtrFleet();
+	    Fleet* fleet1 = m_fleets.find(origin_fleet1->getID());
+        int rank1 = pirate1->getRank() + m_fleets.getRankExtra(origin_fleet1);
+        return output_t<int>(rank1);
+    }
 	
 	// } </DO-NOT-MODIFY>
 };
