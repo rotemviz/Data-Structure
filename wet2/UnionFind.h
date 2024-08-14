@@ -13,7 +13,6 @@ public:
         return m_fleets.insert(id,givenFleet);
     }
     
-    //check if group1 and group2 is exits with rootFleet.
     void uniteGroups(Fleet* group1, Fleet* group2){
         int numOfPiratesGroup1 = group1->getTotalPirates();
         int numOfPiratesGroup2 = group2->getTotalPirates();

@@ -1,15 +1,9 @@
 #include "pirates24b2.h"
 #include <iostream>
 
-oceans_t::oceans_t()
-{
-	
-}
+oceans_t::oceans_t() {}
 
-oceans_t::~oceans_t()
-{
-	
-}
+oceans_t::~oceans_t() {}
 
 
 StatusType oceans_t::add_fleet(int fleetId)
@@ -104,13 +98,11 @@ StatusType oceans_t::unite_fleets(int fleetId1, int fleetId2)
 	Fleet* check1 = m_fleets.find(fleetId1);
 	Fleet* check2 = m_fleets.find(fleetId2);
 	if(!check1 || !check2){
-		//std::cout << "not found" << std::endl;
 		return StatusType::FAILURE;
 	}
 	int updateID1 = check1->getUpdateID();
 	int updateID2 = check2->getUpdateID();
 	if(updateID1 != fleetId1 || updateID2 != fleetId2 || check1->isEmpty() || check2->isEmpty()){
-		//std::cout << "PROBLEM WITH UPDATEID" << std::endl;
 		return StatusType::FAILURE;
 	}
 	m_fleets.uniteGroups(check1,check2);

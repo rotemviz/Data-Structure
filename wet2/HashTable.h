@@ -7,7 +7,6 @@
 
 template<class T>
 class HashTable {
-public:
 
     double MAX_LOAD_FACTOR;
     int m_size;
@@ -57,7 +56,7 @@ public:
         delete [] oldArray;
     }
 
-//public:
+public:
 
     HashTable() : MAX_LOAD_FACTOR(0.75), m_size(1000), m_arr(new List<T>[m_size]), m_assignedCounter(0) {}
 

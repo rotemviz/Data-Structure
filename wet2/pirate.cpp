@@ -1,6 +1,7 @@
 #include "pirate.h"
 
-Pirate::Pirate(int id, Fleet* givenFleet, int rank) : m_id(id),m_coin(0),m_rank(rank),m_fleet(givenFleet){}
+Pirate::Pirate(int id, Fleet* givenFleet, int rank) : m_id(id),m_coin(0),m_rank(rank),m_fleet(givenFleet) {}
+
 void Pirate::setCoin(int change){
     m_coin += change;
 }
